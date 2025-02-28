@@ -6,4 +6,4 @@ const ReliabilityPage:React.FC = () => {
   )
 }
 
-export default ReliabilityPage:React.FC
+export default ReliabilityPage;

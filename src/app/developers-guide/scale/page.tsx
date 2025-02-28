@@ -1,7 +1,7 @@
 import React from 'react'
 
 const ScalePage:React.FC = () => {
-  return (;
+  return (
     <div>ScalePage</div>
   );
 }
