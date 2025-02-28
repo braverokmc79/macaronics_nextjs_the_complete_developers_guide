@@ -1,4 +1,7 @@
+import { Button } from '@/components/ui/button'
 import type { Metadata } from 'next'
+import Link from 'next/link'
+import DevelopersGuideHeader from './components/header'
 
 
 
@@ -10,7 +13,10 @@ export const metadata: Metadata = {
 export default function RootLayout({children,}: {children: React.ReactNode
 }) {
   return (
-    <div>
+    <div className='w-full max-w-screen-2xl mx-auto items-center bg-zinc-100 h-[100vh]'>
+      
+        <DevelopersGuideHeader />
+        
         {children}
     </div>
   )
