@@ -27,7 +27,11 @@ const RootPage: React.FC = () => {
 
           <Button asChild className="bg-pink-500 hover:bg-pink-600">
             <Link href="/products">상품목록</Link>
-          </Button>         
+          </Button> 
+
+          <Button asChild className="bg-pink-500 hover:bg-pink-600">
+            <Link href="/developers-guide">개발 가이드</Link>
+          </Button>        
         </div>
 
 

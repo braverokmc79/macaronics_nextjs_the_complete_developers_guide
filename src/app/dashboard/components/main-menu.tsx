@@ -31,6 +31,7 @@ const MainMenu: React.FC<MainMenuProps> = ({className, setMobileMenuOpen ,sessio
         <MenuItem href="/dashboard/settings">설정</MenuItem>
         <MenuItem href="/dashboard/payments">결제</MenuItem>
         <MenuItem href="/products">상품</MenuItem>
+        <MenuItem href="/developers-guide">개발가이드</MenuItem>
       </ul>
 
 
