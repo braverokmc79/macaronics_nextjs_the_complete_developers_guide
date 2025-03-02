@@ -5,9 +5,12 @@ interface DevelopersGuideLayoutProps {
 }
 const DevelopersGuideLayout:React.FC<DevelopersGuideLayoutProps> = ({children}) => {
   return (
-    <div className='max-w-screen-2xl mx-auto'>
-        {children}
+    <div className='bg-gray-100'>
+      <div className='max-w-screen-2xl mx-auto'>
+          {children}
+      </div>
     </div>
+    
   )
 }
 
