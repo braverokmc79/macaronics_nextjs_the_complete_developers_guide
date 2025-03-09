@@ -22,8 +22,10 @@ const SnippetCreatePage: React.FC = () => {
 
 
   return (
-    <form action={createSnippet}>
-      <h3 className="font-bold m-3">스니펫 생성하기</h3>
+    <div className="max-w-screen-2xl mx-auto h-screen ">
+    <form action={createSnippet}  className=" w-1/2 mx-auto pt-32">
+      
+      <h3 className="font-bold text-2xl mb-3">스니펫 생성하기</h3>
       <div className="flex flex-col gap-4">
 
         <div className="flex gap-4">
@@ -45,6 +47,7 @@ const SnippetCreatePage: React.FC = () => {
         </button>
       </div>
     </form>
+    </div>
   );
 };
 
