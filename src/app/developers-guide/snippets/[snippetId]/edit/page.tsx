@@ -8,18 +8,14 @@ interface SnippetEditPage{
 }
 
 const SnippetEditPage:React.FC<SnippetEditPage> =async ({params}) => {
- 
   const {snippetId} = await params;
-
   const snippet = await prisma.snippet.findFirst({where:{id:parseInt(snippetId)}});
-  
   if((!snippet)) return notFound();
 
 
   return (
 
-    <div className="max-w-screen-2xl mx-auto h-screen ">
-      
+    <div className="max-w-screen-2xl mx-auto h-screen ">    
         <SnippetEditForm snippet={snippet} />
     </div>
 

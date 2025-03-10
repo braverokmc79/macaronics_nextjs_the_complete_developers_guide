@@ -1,30 +1,44 @@
-import prisma from "@/lib/prisma";
-import { redirect } from "next/navigation";
-import React from "react";
+"use client";
+import { createSnippet } from "@/app/actions/prisma/snippets/snippetsAction";
+import React, { useActionState ,startTransition  } from "react";
 
 const SnippetCreatePage: React.FC = () => {
 
-  async function createSnippet(formData: FormData) {
-    //서버 액션이 필요
-    "use server";
+  const [formState, action] =useActionState(createSnippet, {message: ""});
 
-    //form 데이터 가져오기 및 유효성 검사
-    const title = formData.get("title") as string;
-    const code = formData.get("code") as string;
-    console.log(title, code);
-
-    //데이터 베이스에 기록
-    await prisma.snippet.create({ data: { title, code } });
-
-    // 성공시 리다이렉트 처리
-    redirect("/developers-guide/snippets/");
+  /**
+   * 전송전 유효성 체크 방법
+   * @param event 
+   */
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const title=formData.get("title");
+    if (!title) {
+      alert("제목을 입력해 주세요.");
+    }
+  
+    startTransition(() => {
+      action(formData);
+    });
   }
 
 
   return (
     <div className="max-w-screen-2xl mx-auto h-screen ">
-    <form action={createSnippet}  className=" w-1/2 mx-auto pt-32">
+     
+
+    <form onSubmit={handleSubmit}  className=" w-1/2 mx-auto pt-32">
       
+        {formState.message 
+        ?(
+          <div className="my-2 p-2 bg-red-200 border rounded border-red-50">
+            {formState.message}          
+          </div>
+        ):null
+        
+        }
+
       <h3 className="font-bold text-2xl mb-3">스니펫 생성하기</h3>
       <div className="flex flex-col gap-4">
 
