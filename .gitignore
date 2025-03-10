@@ -41,7 +41,44 @@ yarn-error.log*
 next-env.d.ts
 
 
-
-
-
 /prisma/dev.db
+
+
+# guide
+/guide/node_modules
+/guide/coverage
+/guide/.pnp
+/guide/.next/
+/guide/out/
+/guide/build
+/guide/prisma/dev.db
+/guide/.env
+
+
+
+# discuss
+/discuss/node_modules
+/discuss/coverage
+/discuss/.pnp
+/discuss/.next/
+/discuss/out/
+/discuss/build
+/discuss/prisma/dev.db
+/discuss/.env
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
