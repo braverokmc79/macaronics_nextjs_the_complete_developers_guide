@@ -5,12 +5,10 @@ import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 
 interface ProductTopMenuListProps {
-  className?: string; 
-  setMobileMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>
-  session?: any
+  className?: string;   
 }
 
-const ProductTopMenuList:React.FC<ProductTopMenuListProps> = ({className,setMobileMenuOpen,session}) => {
+const ProductTopMenuList:React.FC<ProductTopMenuListProps> = ({className}) => {
    const pathname=usePathname();  
    const menuDeafultClass ="bg-gray-200 text-gray-700 hover:bg-gray-300 p-2 md:bg-white md:p-0 md:hover:bg-white md:hover:text-black" ;
    const menuActiveClass ="bg-pink-200 text-gray-700 hover:bg-pink-300 p-2 md:bg-white md:p-0 md:hover:bg-white md:hover:text-black" ;

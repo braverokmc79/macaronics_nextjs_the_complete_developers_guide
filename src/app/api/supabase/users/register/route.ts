@@ -12,7 +12,7 @@ export const POST = async (request: Request) => {
       const { data: existingUser, error: existingUserError } = await supabase.from("users")
                   .select("*").eq("email", userData.email).single();
   
-       console.log(" =============existingUser :",existingUser);
+       console.log(" =============existingUser :",existingUserError);
   
        if (existingUser) {
         return NextResponse.json({

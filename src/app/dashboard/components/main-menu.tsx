@@ -6,16 +6,24 @@ import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 import {cn} from "@/lib/utils";
 import { doLogout } from "@/app/actions/auth/loginActions";
-import { signOut } from "next-auth/react";
 import Image from "next/image";
+import { Session } from "next-auth";
+
+interface UserSession extends Session {
+  user: {
+    name: string;
+    email: string;
+    image: string;
+  };
+}
 
 interface MainMenuProps {
   className?: string; 
-  setMobileMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>
-  session?: any
+  session?: UserSession
 }
 
-const MainMenu: React.FC<MainMenuProps> = ({className, setMobileMenuOpen ,session}) => {
+const MainMenu: React.FC<MainMenuProps> = ({className,  session}) => {
+  
   return (
     <nav className={cn(`bg-muted overflow-auto p-4 flex flex-col`,className)}  >
 

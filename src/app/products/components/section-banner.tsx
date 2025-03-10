@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useParams, usePathname } from 'next/navigation';
+import {  usePathname } from 'next/navigation';
 import React from 'react'
 
 const ProductsSectionBbannerComponent = () => {

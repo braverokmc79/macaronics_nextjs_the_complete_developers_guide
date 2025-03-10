@@ -1,5 +1,4 @@
 import React from 'react'
-import Image from 'next/image';
 import Hero from './components/hero';
 
 const DevelopersGuideCorpPage:React.FC = () => {
@@ -8,7 +7,7 @@ const DevelopersGuideCorpPage:React.FC = () => {
 
      <div className='flex flex-col items-center justify-center h-[100vh] '>
         <h2 className='text-5xl font-bold mb-10  z-10 relative text-white'>
-          "Next.js Developer Guide -Cops Home Page"
+         ss
         </h2>  
 
        <div className='w-full'>

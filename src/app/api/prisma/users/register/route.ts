@@ -8,6 +8,8 @@ import { auth } from "@/auth";
 export const GET = async (request: Request) => {
   try {
     const session = await auth();
+    console.log(" 샘플 request ", request);
+
 
     if (!session?.user?.email) {
       return NextResponse.json({ error: "User ID not found in session" }, { status: 400 });

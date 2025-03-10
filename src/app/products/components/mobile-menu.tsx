@@ -41,7 +41,7 @@ const MobileMenu:React.FC = () => {
             <h4 className='flex items-center text-2xl'>
                 <span className="text-4xl font-bold text-pink-500 mr-2">M</span>  Macaronics.net
             </h4>
-             <ProductTopMenuList  className="mt-5 flex flex-col font-bold gap-3" setMobileMenuOpen={setMobileMenuOpen} />        
+             <ProductTopMenuList  className="mt-5 flex flex-col font-bold gap-3" />        
             </div>
         </div>
 

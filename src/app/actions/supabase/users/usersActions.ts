@@ -10,7 +10,7 @@ export async function createUser(
 ): Promise<ResponseType<Omit<UserType, "password" | "passwordConfirm">>> {
   try {
     // 중복 이메일 체크
-    const { data: existingUser, error: existingUserError } = await supabase.from("users")
+    const { data: existingUser } = await supabase.from("users")
                 .select("*").eq("email", userData.email).single();
 
      console.log(" =============existingUser :",existingUser);

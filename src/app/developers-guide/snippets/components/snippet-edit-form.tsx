@@ -1,7 +1,7 @@
 "use client";
 import React, {  useState } from 'react'
 import Editor from '@monaco-editor/react';
-import { snippetsAction } from '@/app/actions/prisma/snippets/snippetsAction';
+import { snippetsUpdateAction } from '@/app/actions/prisma/snippets/snippetsAction';
 
 
 interface Snippet {
@@ -20,7 +20,7 @@ const SnippetEditForm: React.FC<SnippetEditFormProps> = ({snippet}) => {
   const [code, setCode] = useState(snippet.code);
   //const [formState, action] = useActionState(action);
 
-  const action=snippetsAction.bind(null,snippet.id, code);
+  const action=snippetsUpdateAction.bind(null,snippet.id, code);
 
   const handleEditorChange = (value: string="") => {
     console.log(value);

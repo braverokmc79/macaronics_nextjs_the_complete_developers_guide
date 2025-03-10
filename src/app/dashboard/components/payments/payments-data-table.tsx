@@ -32,7 +32,7 @@ import PaymentsLoading from "../../payments/loading"
 
 interface DataTableProps<TData, TValue> {
   isLoading: boolean
-  error: any
+  error: unknown
   paymentsColumns: ColumnDef<TData, TValue>[]
   data: TData[]
   page: number
@@ -56,7 +56,7 @@ export function PaymentsDataTable<TData, TValue>({
   paymentsColumns,
   data,
   page, pageSize, totalCount,setPage,setPageSize,
-  searchType, keyword, setSearchType, setKeyword, handleSearch,
+  searchType, keyword, setSearchType,  handleSearch,
   handleKeywordChange,handleKeyDown
 }: DataTableProps<TData, TValue>) {
  

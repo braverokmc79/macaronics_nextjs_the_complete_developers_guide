@@ -67,7 +67,7 @@ const TeamsStats:React.FC = () => {
     <div className='grid lg:grid-cols-3 gap-4'>
         <Card>
             <CardHeader className='pb-2'>
-                <CardTitle className='text-base'>전체 팀</CardTitle>    
+                <CardTitle className='text-base'>전체 팀  {employeesPresentPercentage && employeesPresentPercentage}</CardTitle>    
             </CardHeader>   
             <CardContent className='flex justify-between items-center'>
                 <div className='flex gap-2'>

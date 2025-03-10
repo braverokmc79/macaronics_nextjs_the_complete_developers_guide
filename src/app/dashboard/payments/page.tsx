@@ -9,7 +9,7 @@ import { useDebounce } from "@/hooks/useDebounce";
 import { PaymentsDataTable } from "../components/payments/payments-data-table";
 import { PaymentsDataTableColumns } from "../components/payments/payments-data-table-columns";
 
-const fetchPayments= async ({ queryKey }: { queryKey: any }) => {
+const fetchPayments= async ({ queryKey }: { queryKey: [string, number, number, string, string] }) => {
   const [, page, pageSize, searchType, keyword] = queryKey;
   const queryString = `${process.env.NEXT_PUBLIC_API_ROUTES_TYPE}/payments?page=${page}&pageSize=${pageSize}&searchType=${searchType}&keyword=${keyword}`;
   
@@ -70,7 +70,7 @@ export default function PaymentsPage() {
     setKeyword(tempKeyword); // 사용자가 입력한 검색어 반영
     setPage(1);
     queryClient.invalidateQueries({ queryKey: ["employees", page, pageSize, searchType, keyword] });
-  }, [searchType, tempKeyword, queryClient]);
+  }, [searchType, tempKeyword, page, pageSize, keyword, queryClient]);
 
 
   //⭕ 페이징

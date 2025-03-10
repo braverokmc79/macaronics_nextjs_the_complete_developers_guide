@@ -4,7 +4,7 @@ import { ResponseType } from "@/types/ResponseType";
 
 //API 라우트(springboot) :  /api/mongo/users/register
 export const GET = async (request: Request) => {
-  console.log("  springboot   유저 등록");
+  console.log("  springboot   유저 등록 :", request);
   return NextResponse.json<ResponseType>({
     status: 200,
     message: "GET API springboot   유저 등록",
@@ -16,11 +16,11 @@ export const GET = async (request: Request) => {
 export const POST = async (request: Request) => {
   try {
   
-    return NextResponse.json<ResponseType<Omit<any, "password">>>({
+    return NextResponse.json<ResponseType>({
       status: 201,
       message: "성공적으로 회원 가입 처리 되었습니다.",
       data: {
-        email: '',
+        email: request.url,
         dob: new Date(),       
       }
     });

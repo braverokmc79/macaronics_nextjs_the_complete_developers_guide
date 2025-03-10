@@ -35,7 +35,7 @@ const MobileMenu:React.FC = () => {
                 </Button>
             </DrawerClose>
 
-            <MainMenu  className="md:flex"  setMobileMenuOpen={setMobileMenuOpen} />        
+            <MainMenu  className="md:flex" />        
         </div>
 
         <DrawerFooter  className="hidden">

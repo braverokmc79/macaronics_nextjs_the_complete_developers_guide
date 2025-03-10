@@ -4,12 +4,23 @@ import MainMenu from './components/main-menu'
 import MenuTitle from './components/menu-title'
 import MobileMenu from './components/mobile-menu'
 import { useMediaQuery } from '@/hooks/use-media-query';
+import { Session } from 'next-auth';
+
+interface UserSession extends Session {
+    user: {
+      name: string;
+      email: string;
+      image: string;
+    };
+  }
+  
 
 interface DashboardLayoutClientProps {
     children: React.ReactNode;
     username: string;
-    session: any
+    session: UserSession
 }
+
 
 const DashboardLayoutClient: React.FC<DashboardLayoutClientProps> = ({ children, username,session }) => {
     const isDesktop = useMediaQuery("(min-width: 768px)");
