@@ -2,7 +2,7 @@
 
 import { HeroUIProvider } from "@heroui/system";
 import React from "react";
-
+import { SessionProvider } from 'next-auth/react';
 
 interface ProvidersProps {
   children: React.ReactNode;
@@ -10,11 +10,13 @@ interface ProvidersProps {
  
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
   return (
-    <HeroUIProvider>    
-       <main className="text-foreground bg-background">
-         {children}      
-      </main>
-    </HeroUIProvider>
+    <SessionProvider>
+      <HeroUIProvider>    
+        <main className="text-foreground bg-background">
+          {children}      
+        </main>
+      </HeroUIProvider>
+    </SessionProvider>
   );
 };
  
