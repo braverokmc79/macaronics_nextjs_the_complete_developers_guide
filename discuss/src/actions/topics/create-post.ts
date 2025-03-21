@@ -1,6 +1,5 @@
 "user server";
 
-export async function createPost(data: FormData) {
-
+export async function createPost() {
 
 }

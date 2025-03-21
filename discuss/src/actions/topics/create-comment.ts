@@ -1,6 +1,5 @@
 "user server";
 
-export async function createComment(data: FormData) {
-
+export async function createComment() {
 
 }
