@@ -1,4 +1,4 @@
-"user server";
+"use server";
 
 export async function createComment() {
 

@@ -1,41 +1,91 @@
-"use client"
-import React, { useState } from 'react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+"use client";
+import React from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "../ui/textarea";
+import { createTopic } from "@/actions/topics";
+import { useActionState, startTransition } from "react";
+
+
 
 const TopicCreateForm: React.FC = () => {
-  const [topic, setTopic] = useState('')
+  const [formState, action] = useActionState(createTopic,  
+    {errors:{}}  // 반환 에러 타입 동일하게 지정
+  );
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Submitted Topic:', topic)
+  console.log("=============formState  :", formState);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    startTransition(() => {
+      action(formData);
+    });
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Create a Topic</Button>
+        <Button>토픽 만들기</Button>
       </DialogTrigger>
+
       <DialogContent className="max-w-lg">
-        <DialogHeader>
-          <DialogTitle>Create a Topic</DialogTitle>
+        <DialogHeader className="py-4">
+          <DialogTitle>토픽 만들기</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Label>Topic Name</Label>
-            <Input 
-              placeholder="Enter topic name" 
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-            />
+        
+        <form 
+        onSubmit={handleSubmit}
+        className="space-y-4">
+          <div className="space-y-5">
+            <div className="space-y-2">
+              <Label>토픽명</Label> 
+              <Input
+                name="name"
+                placeholder="토픽명을 입력하세요."                         
+                className={`h-9 ${formState.errors.name ? "border-red-500" : ""}`}
+              /> 
+              {formState.errors.name && 
+              <p className="text-red-500 text-sm">{formState.errors.name?.join(", ")}</p>
+              }
+            </div>
+
+            <div className="space-y-2">
+              <Label>내용</Label>
+              <Textarea
+                name="description"
+                placeholder="토픽의 내용을 입력해주세요."
+                rows={10}
+                className={`h-48 ${formState.errors.description ? "border-red-500" : ""}`}
+              />
+              {formState.errors.description && 
+              <p className="text-red-500 text-sm">{formState.errors.description?.join(", ")}</p>
+              }
+            </div>
           </div>
-          <Button type="submit" className="w-full">Create</Button>
+
+  
+          {formState.errors._form ? (
+            <p className="rounded p-2 bg-red-200 border border-red-400">
+                {formState.errors._form?.join(", ")}
+            </p>) : null
+          }            
+
+          <Button type="submit" className="w-full">생성하기</Button>
         </form>
+      
+      
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default TopicCreateForm
+export default TopicCreateForm;

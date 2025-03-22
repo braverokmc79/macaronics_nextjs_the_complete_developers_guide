@@ -124,3 +124,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+input:focus,textarea:focus,  button:focus{
+  outline:none !important;
+  border:none !important;
+}
+
+button{
+  cursor:pointer;
+}
