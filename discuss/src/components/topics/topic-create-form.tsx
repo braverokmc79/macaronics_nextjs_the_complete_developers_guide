@@ -13,11 +13,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "../ui/textarea";
 import { createTopic } from "@/actions/topics";
 import { useActionState, startTransition } from "react";
+import FormButton from "../common/form-button";
 
 
 
 const TopicCreateForm: React.FC = () => {
-  const [formState, action] = useActionState(createTopic,  
+  const [formState, action, isPending] = useActionState(createTopic,  
     {errors:{}}  // 반환 에러 타입 동일하게 지정
   );
 
@@ -79,7 +80,10 @@ const TopicCreateForm: React.FC = () => {
             </p>) : null
           }            
 
-          <Button type="submit" className="w-full">생성하기</Button>
+          
+          <FormButton className="w-full"  
+                isLoading={isPending}>생성하기
+           </FormButton>
         </form>
       
       
