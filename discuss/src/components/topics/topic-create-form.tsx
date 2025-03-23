@@ -22,8 +22,6 @@ const TopicCreateForm: React.FC = () => {
     {errors:{}}  // 반환 에러 타입 동일하게 지정
   );
 
-  console.log("=============formState  :", formState);
-
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -34,7 +32,7 @@ const TopicCreateForm: React.FC = () => {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild className="bg-blue-600 hover:bg-blue-500">
         <Button>토픽 만들기</Button>
       </DialogTrigger>
 
