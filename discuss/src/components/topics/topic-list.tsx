@@ -18,10 +18,9 @@ const TopicList=async () => {
     )
   });
 
-
   
   return (
-    <div className='flex flex-row gap-2 mt-5'>
+    <div className='flex flex-row flex-wrap jsutify-start gap-2 mt-5 '>
       {renderedTopics}
     </div>
   )

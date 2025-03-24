@@ -38,11 +38,7 @@ export async function createPost(
             }
         }
     }
-    const result=createPostSchema.safeParse({
-        title: formData.get('title'),
-        content: formData.get('content'),
-    });
-      
+
     const topic = await db.topic.findUnique({ where: { slug } });
     if(!topic){
         return{
@@ -52,6 +48,11 @@ export async function createPost(
         }
     }
 
+    const result=createPostSchema.safeParse({
+        title: formData.get('title'),
+        content: formData.get('content'),
+    });
+      
     if(!result.success){
         return{
             errors:result.error.flatten().fieldErrors   
@@ -88,8 +89,6 @@ export async function createPost(
         }
 
     }
-
-
  
     revalidatePath("/");
     redirect(paths.postShow(slug, post.id));

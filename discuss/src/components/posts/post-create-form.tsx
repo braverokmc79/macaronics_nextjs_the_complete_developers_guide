@@ -15,7 +15,7 @@ interface PostCreateFormProps {
 const PostCreateForm: React.FC<PostCreateFormProps>  = ({slug}) => {
   
  const [open, setOpen] = useState(false); // 다이얼로그 상태 관리
-  const [formState, action, isPending] = useActionState(createPost.bind(null, slug), 
+ const [formState, action, isPending] = useActionState(createPost.bind(null, slug), 
         {errors:{}}  // 반환 에러 타입 동일하게 지정topic
   );
 
@@ -70,11 +70,8 @@ function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
                     
                 }
 
-
-
                 <FormButton className="w-full"  isLoading={isPending}>포스트 생성하기</FormButton>
             </form>
-
 
             </div>
         </DialogContent>
