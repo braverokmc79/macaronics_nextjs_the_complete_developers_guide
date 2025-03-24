@@ -1,6 +1,10 @@
 "use server";
 import { auth } from "@/auth";
 import { db } from "@/db";
+import paths from "@/paths";
+import type { Post, Topic } from "@prisma/client";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import {z} from "zod";
 
 const createCommentSchema = z.object({
@@ -38,13 +42,13 @@ export async function createComment(formState: CreateCommentFormStateProps, form
        }
     }
 
+    const postId = formData.get("postId") as string;
+    const parentId = formData.get("parentId") as string | undefined;
+    const content = formData.get("content") as string;
 
-    try {
-        
-        const postId = formData.get("postId") as string;
-        const parentId = formData.get("parentId") as string | undefined;
-        const content = formData.get("content") as string;
-  
+    let getPost: Post & { topic: Topic };
+    try {        
+
        await db.comment.create({
                 data: {
                     content,
@@ -54,8 +58,12 @@ export async function createComment(formState: CreateCommentFormStateProps, form
                 }
         });
 
-    
-        return { success: true, errors: {} };
+        getPost = await db.post.findUnique({
+            where:{id: postId},
+            include:{
+                topic: {select:{slug:true}},             
+             }
+        }) as Post  & { topic: Topic};
 
     } catch (error) {
         console.log("댓글  생성 오류 :",error);
@@ -77,4 +85,7 @@ export async function createComment(formState: CreateCommentFormStateProps, form
         }
     }
   
+    revalidatePath("/");
+    redirect(paths.postShow(getPost?.topic.slug, postId));
+
 }
