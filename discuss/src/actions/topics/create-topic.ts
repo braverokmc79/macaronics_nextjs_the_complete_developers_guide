@@ -85,6 +85,8 @@ export async function createTopic(
     }
 
 
+
+
     revalidatePath("/");
     redirect(paths.topicShow(topic.slug));
 

@@ -1,10 +1,11 @@
 import CommentCreateForm from '@/components/comments/comment-create-form';
 import CommentList from '@/components/comments/comment-list';
 import PostShow from '@/components/posts/post-show';
+import PostShowLoading from '@/components/posts/post-show-loading';
 import { fetchCommentsByPostId } from '@/db/queries/comments';
 import paths from '@/paths';
 import Link from 'next/link';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 interface PostDetailsPageProps {
   params: Promise<{
@@ -28,14 +29,15 @@ const PostShowPage: React.FC<PostDetailsPageProps> = async ({ params }) => {
       </Link>
 
       <div className="bg-white shadow-lg rounded-2xl p-6 border min-h-lvh">
-        <PostShow postId={postId} />
-     
-
+        <Suspense fallback={<PostShowLoading />}>         
+           <PostShow postId={postId} />     
+        </Suspense>
+        
         <CommentCreateForm postId={postId} startOpen />
-
-        <CommentList fetchData={() => fetchCommentsByPostId(postId)} />
-
+      
+        <CommentList fetchData={() => fetchCommentsByPostId(postId)} postId={postId} />
       </div>
+
     </div>
   );
 };

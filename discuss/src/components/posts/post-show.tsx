@@ -7,6 +7,8 @@ interface PostShowProps {
 }
 
 const PostShow: React.FC<PostShowProps> = async ({ postId }) => {
+  await new Promise((resolve) => {setTimeout(resolve, 3000)});
+
   const post = await db.post.findFirst({
     where: { id: postId },
     include: {

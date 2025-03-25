@@ -1,5 +1,8 @@
+"use server";
 import type { Comment } from "@prisma/client";
 import {db} from "@/db";
+import {cache} from "react";
+
 
 export type CommentWithAuthor =Comment & {
     user:{
@@ -8,7 +11,9 @@ export type CommentWithAuthor =Comment & {
     };
 }
 
-export function fetchCommentsByPostId(postId:string) :Promise<CommentWithAuthor[]> {
+export const fetchCommentsByPostId =  cache(async(postId:string):Promise<CommentWithAuthor[]> =>{
+
+    console.log("🎈Fetching comments for post ID:", postId);
 
     return db.comment.findMany({
         where:{postId},
@@ -22,7 +27,12 @@ export function fetchCommentsByPostId(postId:string) :Promise<CommentWithAuthor[
         },
     });
 
-    // TODO: Implement pagination for large comment lists
+});
+
+
+
+
+  // TODO: Implement pagination for large comment lists
 
     // TODO: Add support for filtering comments by user ID
 
@@ -37,9 +47,4 @@ export function fetchCommentsByPostId(postId:string) :Promise<CommentWithAuthor[
     // TODO: Add support for fetching comments with attachments (e.g., images or videos)
 
     // TODO: Add support for fetching comments with reactions (e.g., thumbs up or thumbs down)
-
-}
-
-
-
  
