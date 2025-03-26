@@ -1,23 +1,25 @@
 import React from "react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger }from "@/components/ui/dropdown-menu";
-import { Search, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import HeaderAuth from "@/components/header-auth";
 import Link from "next/link";
+import SearchInput from "./search-input";
 
 const Header: React.FC = () => {
 
 
   return (
-  <header className="w-full max-w-screen-2xl mx-auto  p-4 bg-white shadow-md flex items-center justify-between">
+  <header className="w-full max-w-screen-2xl mx-auto  bg-white shadow-md flex 
+      flex-col md:flex-row md:p-4 gap-2
+      items-center justify-between">
         {/* 로고 */}
-        <div className="text-xl font-bold">
+        <div className="text-xl font-bold pr-5">
           <Link href="/">Topics</Link>
         </div>
         
         {/* Topics Dropdown */}
-        <div className="flex flex-col md:flex-row gap-2">
+        <div className="w-1/2  flex flex-col md:flex-row gap-2 justify-start">
             
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -39,10 +41,8 @@ const Header: React.FC = () => {
         </div>
   
         {/* Search Bar */}
-        <div className="relative w-64">
-          <Input type="search" placeholder="검색..." className="pl-10" />
-          <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" />
-        </div>
+        <SearchInput />
+
         
         {/* Authentication Buttons */}
         <div className="flex gap-2">
