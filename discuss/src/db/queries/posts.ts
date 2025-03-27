@@ -60,8 +60,6 @@ export const fetchTopPost=cache(():Promise<PostWithData[]> => {
         take: 5,     
     });
 
-
     console.log("🤢Fetching top posts...", result);
-
     return result;  
 });

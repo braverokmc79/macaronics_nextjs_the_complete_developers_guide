@@ -2,9 +2,9 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import {  LogIn, LogOut,  } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { signIn, signUp,signOut } from "@/actions/auth";
-import { Popover, PopoverContent, PopoverTrigger } from "../components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useSession } from "next-auth/react";
 
 const HeaderAuth: React.FC = () => {

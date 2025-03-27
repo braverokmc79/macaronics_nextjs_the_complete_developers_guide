@@ -5,13 +5,13 @@ import React from 'react'
 
 
 interface PostListProps{
-    fetchData: ()=>Promise<PostWithData[]>
+    fetchData: ()=>Promise<PostWithData[]>,
+    postType?:string
 }
 
 
+const PostList:React.FC<PostListProps> = async ({postType="post", fetchData}) => {
 
-
-const PostList:React.FC<PostListProps> = async ({fetchData}) => {
   const posts = await fetchData();
 
   const renderPosts=posts.map(post =>{
@@ -24,7 +24,10 @@ const PostList:React.FC<PostListProps> = async ({fetchData}) => {
         return(
         <div key={post.id} className="border rounded p-2  mb-2">
           <Link href={paths.postShow(topicSlug, post.id)}>
-                <h3 className="text-lg font-bold">{post.title}</h3>
+                <h3 className="text-lg font-bold">
+                 {postType==="popularPosts" &&<small>[{post.topic.slug}] </small>} 
+                  {post.title}
+                </h3>
                 <div className="flex flex-row gap-8">
                     <p className="text-xs text-gray-400">By {post.user.name}</p>
                     <p className="text-xs text-gray-400">

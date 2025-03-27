@@ -2,7 +2,8 @@ import React from 'react';
 import { db } from '@/db';
 import paths from '@/paths';
 import Link from 'next/link';
-import { Chip } from '../Chip';
+import { Chip } from '../chip';
+
 
 
 const TopicList=async () => {

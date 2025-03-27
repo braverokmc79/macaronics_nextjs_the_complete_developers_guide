@@ -14,6 +14,7 @@ import { Textarea } from "../ui/textarea";
 import { createTopic } from "@/actions/topics";
 import { useActionState, startTransition } from "react";
 import FormButton from "../common/form-button";
+import { PlusCircle } from "lucide-react";
 
 
 
@@ -31,9 +32,9 @@ const TopicCreateForm: React.FC = () => {
   }
 
   return (
-    <Dialog>
+    <Dialog  >
       <DialogTrigger asChild className="bg-blue-600 hover:bg-blue-500">
-        <Button>토픽 만들기</Button>
+        <Button> <PlusCircle className="w-4 h-4" />토픽 만들기</Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-lg">

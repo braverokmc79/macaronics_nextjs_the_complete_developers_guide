@@ -9,10 +9,10 @@ export default async function Home() {
   return (
     <div className="grid grid-cols-4 gap-4 p-4">      
       <div className="col-span-3">        
-            <h1 className="text-xl m-2">Top Posts</h1>
-            <PostList fetchData={() => fetchTopPost()}  />
+            <h1 className="text-xl m-2">인기 토픽</h1>
+            <PostList fetchData={() => fetchTopPost()} postType="popularPosts" />
       </div>
-
+      
 
       <div className="border shadow py-3 px-2 relative">
         <TopicCreateForm />  
