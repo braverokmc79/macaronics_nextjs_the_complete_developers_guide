@@ -1,50 +1,48 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  //DropdownMenuItem,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// import Link from "next/link";
-// import { db } from "@/db";
-// import paths from "@/paths";
+import Link from "next/link";
+import paths from "@/paths";
+import type { Topic } from "@prisma/client";
+
 const HeaderMenu: React.FC = () => {
-  
-  //const topics =await db.topic.findMany();
-  // const renderedTopics =topics.map((topic) =>{
-  //   return(
-  //     <DropdownMenuItem key={topic.id}>    
-  //       <Link href={paths.topicShow(topic.slug)}>
-  //       {topic?.slug}                               
-  //       </Link>      
-  //     </DropdownMenuItem>
-  //   )
-  // });
+  const [topics, setTopics] = useState<Topic[]>([]);
 
-  
+  useEffect(() => {
+    const fetchTopics = async () => {
+      try {
+        const response = await fetch("/api/topics");
+        if (!response.ok) throw new Error("Failed to fetch topics");
+        const data = await response.json();
+        setTopics(data.topics);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchTopics();
+  }, []);
+
   return (
-    <>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline">토픽목록</Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="ml-10">          
-          {/* {renderedTopics} */}
-{/*           
-          <DropdownMenuItem>
-            <Link href="/topics">토픽1</Link>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline">토픽 목록</Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="ml-10">
+        {topics.map((topic) => (
+          <DropdownMenuItem key={topic.id}>
+            <Link href={paths.topicShow(topic.slug)}>{topic.slug}</Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>토픽2</DropdownMenuItem>
-          <DropdownMenuItem>토픽3</DropdownMenuItem> */}
-
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      {/* <Button variant="outline" className="flex items-center gap-2" >
-         토픽생성
-      </Button> */}
-    </>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
     ],
 
   },
+  experimental: {
+
+  },
+  reactStrictMode: false,
 };
 
 

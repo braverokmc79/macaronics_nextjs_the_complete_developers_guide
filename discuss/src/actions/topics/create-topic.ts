@@ -17,7 +17,7 @@ const createTopicSchema = z.object({
     .regex(/^[a-z-]+$/, { message: "토픽명은 영문 소문자와 하이픈(-)만 사용 가능합니다." }),
   description: z
     .string({ required_error: "토픽의 내용을 입력해주세요." })
-    .min(10, "내용은 최소 10자 이상이어야 합니다."),
+    .min(5, "내용은 최소 5자 이상이어야 합니다."),
 });
 
 export interface CreateTopicFormState{
@@ -86,5 +86,7 @@ export async function createTopic(
 
 
     revalidatePath("/");
+    revalidatePath("/api/topics");
+    
     redirect(paths.topicShow(topic.slug));
 }

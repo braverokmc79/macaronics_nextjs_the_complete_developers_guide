@@ -17,14 +17,16 @@ const Header: React.FC = () => {
       flex-col md:flex-row md:p-4 gap-2
       items-center justify-between">
         {/* 로고 */}
-        <div className="text-xl font-bold pr-5">
+        <div className="w-full px-2 md:w-20  text-xl font-bold pr-5 flex flex-row justify-between">
           <Link href="/">Topics</Link>
+          {!isDesktop && <MobileMenu  /> }
         </div>
         
         {/* Topics Dropdown */}
-        <div className="w-1/2  flex flex-col md:flex-row gap-2 justify-start">            
+        {isDesktop && <div className="w-1/2  flex flex-col md:flex-row gap-2 justify-start">            
             <HeaderMenu />                  
         </div>
+      }
   
         {/* Search Bar */}
         <Suspense fallback={<div>로딩 중...</div>}>
@@ -33,12 +35,9 @@ const Header: React.FC = () => {
 
         
         {/* Authentication Buttons */}
-        <div className="flex gap-2">
+        <div className="py-2 md:py-0 flex gap-2">
           <HeaderAuth />          
         </div>
-
-
-        {!isDesktop && <MobileMenu  /> }
         
   </header>
   );

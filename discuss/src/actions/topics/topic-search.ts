@@ -1,10 +1,8 @@
 "use server";
 
-
 interface TopicSearchProps{
     returnUrl: string;  // form data
 }
-
 
 export  async function topicSearch(formState:TopicSearchProps,  formData :FormData):Promise<TopicSearchProps>{
 
@@ -16,7 +14,6 @@ export  async function topicSearch(formState:TopicSearchProps,  formData :FormDa
         return {
             returnUrl,
         }
-
     }
 
     //redirect(`/topics/search?term=${term}`);
@@ -24,5 +21,4 @@ export  async function topicSearch(formState:TopicSearchProps,  formData :FormDa
     return {
         returnUrl
     }
-
 }

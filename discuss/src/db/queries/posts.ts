@@ -12,7 +12,7 @@ export type PostWithData =Post & {
  * 검색처리
  * @returns 
  */
-export function fetchPostsBySearchTerm(term:string):Promise<PostWithData[]> {
+export async function fetchPostsBySearchTerm(term:string):Promise<PostWithData[]> {
   return db.post.findMany({
     include: {
         topic: {select:{slug:true}},
@@ -33,7 +33,7 @@ export const fetchPostsByTopicSlug=cache(async(slug:string):Promise<PostWithData
     return db.post.findMany({
         where:{topic: {slug:slug}},
         include:{
-           topic: {select:{slug:true}},
+           topic: {select:{slug:true,description: true}},
            user:{select:{name:true}},
            _count:{select:{comments:true}},
         }
@@ -43,7 +43,7 @@ export const fetchPostsByTopicSlug=cache(async(slug:string):Promise<PostWithData
 
 
 
-export const fetchTopPost=cache(():Promise<PostWithData[]> => {
+export  const fetchTopPost=cache(async ():Promise<PostWithData[]> => {
     const result=   db.post.findMany({       
         orderBy: [
           {
@@ -60,6 +60,6 @@ export const fetchTopPost=cache(():Promise<PostWithData[]> => {
         take: 5,     
     });
 
-    console.log("🤢Fetching top posts...", result);
+    //console.log("🤢Fetching top posts...", result);
     return result;  
 });

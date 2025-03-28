@@ -15,10 +15,12 @@ import { createTopic } from "@/actions/topics";
 import { useActionState, startTransition } from "react";
 import FormButton from "../common/form-button";
 import { PlusCircle } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 
 
 const TopicCreateForm: React.FC = () => {
+  const {status } = useSession();
   const [formState, action, isPending] = useActionState(createTopic,  
     {errors:{}}  // 반환 에러 타입 동일하게 지정
   );
@@ -33,15 +35,16 @@ const TopicCreateForm: React.FC = () => {
 
   return (
     <Dialog  >
-      <DialogTrigger asChild className="bg-blue-600 hover:bg-blue-500">
-        <Button> <PlusCircle className="w-4 h-4" />토픽 만들기</Button>
-      </DialogTrigger>
+      {status==="authenticated" &&   
+        <DialogTrigger asChild className="bg-blue-600 hover:bg-blue-500">
+          <Button> <PlusCircle className="w-4 h-4" />토픽 만들기</Button>
+        </DialogTrigger>
+       }
 
       <DialogContent className="max-w-lg">
-        <DialogHeader className="py-4">
-          <DialogTitle>토픽 만들기</DialogTitle>
-        </DialogHeader>
-        
+          <DialogHeader className="py-4">
+           <DialogTitle>토픽 만들기</DialogTitle>
+         </DialogHeader>        
         <form 
         onSubmit={handleSubmit}
         className="space-y-4">
@@ -83,10 +86,10 @@ const TopicCreateForm: React.FC = () => {
           <FormButton className="w-full"  
                 isLoading={isPending}>생성하기
            </FormButton>
-        </form>
-      
-      
+        </form>      
       </DialogContent>
+
+
     </Dialog>
   );
 };

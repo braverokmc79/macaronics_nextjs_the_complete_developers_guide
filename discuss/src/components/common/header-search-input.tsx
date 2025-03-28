@@ -42,7 +42,7 @@ const SearchInput = () => {
   
 
   return (
-    <div className="w-1/2 pr-2 relative">
+    <div className="w-full px-2 md:w-1/2 md:pr-2 relative">
       <form
         onSubmit={handleSubmit}
       >
