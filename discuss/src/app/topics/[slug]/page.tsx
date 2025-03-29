@@ -3,7 +3,7 @@ import PostList from "@/components/posts/post-list";
 import React from "react";
 import { fetchPostsByTopicSlug } from "@/db/queries/posts";
 import type { Topic } from "@prisma/client";
-import { getTopicInfo } from "@/actions/topics/topic-info";
+import { getTopicInfo } from "@/actions/topics/info-topic";
 import { auth } from "@/auth";
 
 
@@ -24,16 +24,16 @@ const TopicShowPage: React.FC<TopicShowPageProps> = async ({ params }) => {
           <h1 className="text-2xl font-bold">{slug}</h1>
           {topic?.description  && (
             <p className="w-full text-gray-600 mt-2">
-              <span className="">설명: </span>
+              <span className="">⭕ </span>
               {topic.description}</p>
           )}
         </div>
 
-        {session && topic && <PostCreateForm slug={slug} topicId={topic?.id} />  }
+        {session && topic && <PostCreateForm topic={topic}  /> }
       </div>
       
       <div className="grid grid-cols-2 gap-4">
-      <PostList fetchData={() => fetchPostsByTopicSlug(slug)} />
+       <PostList fetchData={() => fetchPostsByTopicSlug(slug)} />
       </div>
 
     </div>

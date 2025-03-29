@@ -21,23 +21,22 @@ const PostShowPage: React.FC<PostDetailsPageProps> = async ({ params }) => {
     <div className="w-full  mx-auto space-y-6 mt-8 ">
       <Link
         href={paths.topicShow(slug)}
-        className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800
-         transition-colors"
-      >
-        <span className="text-lg">←</span> 
-        <span className="underline decoration-solid font-medium">뒤로가기</span>
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg
+         bg-black text-white text-sm hover:bg-zinc-700 transition-all">
+
+        <span className="text-lg">←</span>
+        <span className="hover:underline decoration-solid font-medium">뒤로가기</span>
       </Link>
+
 
       <div className="bg-white shadow-lg rounded-2xl p-6 border min-h-lvh">
         <Suspense fallback={<PostShowLoading />}>         
            <PostShow postId={postId} />     
         </Suspense>
         
-        <CommentCreateForm postId={postId} startOpen />
-      
+        <CommentCreateForm postId={postId} startOpen />      
         <CommentList fetchData={() => fetchCommentsByPostId(postId)} postId={postId} />
       </div>
-
     </div>
   );
 };

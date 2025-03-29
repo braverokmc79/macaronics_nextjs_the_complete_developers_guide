@@ -5,8 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import FormButton from "@/components/common/form-button";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
-import { createComment } from "@/actions/topics";
+
 import { Label } from "../ui/label";
+import { createComment } from "@/actions/comments/create-comment";
 
 interface CommentCreateFormProps {
   postId: string;

@@ -4,24 +4,25 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  DialogTitle,  
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "../ui/textarea";
 import { useActionState, startTransition } from "react";
 import FormButton from "../common/form-button";
-import { PlusCircle } from "lucide-react";
-import { useSession } from "next-auth/react";
-import { createTopic } from "@/actions/topics/create-topic";
+import { Topic } from "@prisma/client";
+import { updateTopic } from "@/actions/topics/update-topic";
 
+interface TopicUpdateFormProps {
+  topic: Topic;
+  topicUpdateOpen: boolean;
+  setTopicUpdateOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+const TopicUpdateForm: React.FC<TopicUpdateFormProps> = ({topic, topicUpdateOpen, setTopicUpdateOpen}) => {
 
-const TopicCreateForm: React.FC = () => {
-  const {status } = useSession();
-  const [formState, action, isPending] = useActionState(createTopic,  {errors:{}});
+  const [formState, action, isPending] = useActionState(updateTopic,{errors:{}});
 
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -33,26 +34,26 @@ const TopicCreateForm: React.FC = () => {
   }
 
   return (
-    <Dialog  >
-      {status==="authenticated" &&   
-        <DialogTrigger asChild className="bg-blue-600 hover:bg-blue-500">
-          <Button> <PlusCircle className="w-4 h-4" />토픽 만들기</Button>
-        </DialogTrigger>
-       }
-
+    <Dialog open={topicUpdateOpen}  onOpenChange={setTopicUpdateOpen} >
+     
       <DialogContent className="max-w-lg">
-         <DialogHeader className="py-4">
-           <DialogTitle>토픽 만들기</DialogTitle>
+          <DialogHeader className="py-4">
+           <DialogTitle>토픽 수정하기</DialogTitle>
          </DialogHeader>        
-        <form  onSubmit={handleSubmit} className="space-y-4">
-
+        <form 
+        onSubmit={handleSubmit}
+        className="space-y-4">
           <div className="space-y-5">
             <div className="space-y-2">
+
+            <Input name="id" type="hidden" value={topic.id} /> 
+              
               <Label>토픽명</Label> 
               <Input
                 name="slug"
                 placeholder="토픽명을 입력하세요."                         
                 className={`h-9 ${formState.errors.slug ? "border-red-500" : ""}`}
+                defaultValue={topic.slug}
               /> 
               {formState.errors.slug && 
               <p className="text-red-500 text-sm">{formState.errors.slug?.join(", ")}</p>
@@ -66,6 +67,7 @@ const TopicCreateForm: React.FC = () => {
                 placeholder="토픽의 내용을 입력해주세요."
                 rows={10}
                 className={`h-48 ${formState.errors.description ? "border-red-500" : ""}`}
+                defaultValue={topic.description}
               />
               {formState.errors.description && 
               <p className="text-red-500 text-sm">{formState.errors.description?.join(", ")}</p>
@@ -78,14 +80,16 @@ const TopicCreateForm: React.FC = () => {
             <p className="rounded p-2 bg-red-200 border border-red-400">
                 {formState.errors._form?.join(", ")}
             </p>) : null
-          }                      
+          }            
           
-          <FormButton className="w-full"  isLoading={isPending}>생성하기 </FormButton>
-
+          <FormButton className="w-full"  
+                isLoading={isPending}>토픽 수정하기
+           </FormButton>
         </form>      
       </DialogContent>
+
     </Dialog>
   );
 };
 
-export default TopicCreateForm;
+export default TopicUpdateForm;
