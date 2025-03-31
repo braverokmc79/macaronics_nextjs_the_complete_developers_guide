@@ -3,7 +3,7 @@ import PostList from "@/components/posts/post-list";
 import React from "react";
 import { fetchPostsByTopicSlug } from "@/db/queries/posts";
 import type { Topic } from "@prisma/client";
-import { getTopicInfo } from "@/actions/topics/info-topic";
+import { selectTopic } from "@/actions/topics/select-topic";
 import { auth } from "@/auth";
 
 
@@ -14,7 +14,7 @@ interface TopicShowPageProps{
 
 const TopicShowPage: React.FC<TopicShowPageProps> = async ({ params }) => {
   const { slug } = await params;
-  const topic  = await getTopicInfo(slug) as Topic | null ;
+  const topic  = await selectTopic(slug) as Topic | null ;
   const session =await auth();
 
   return (

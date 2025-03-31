@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { fetchCommentsByPostId } from "@/db/queries/comments";
 import CommentCreateForm from "@/components/comments/comment-create-form";
+import CommentSetting from "./comment-setting";
 
 interface CommentShowProps {
   commentId: string;
@@ -34,14 +35,24 @@ export default async function CommentShow({ commentId , postId}: CommentShowProp
           height={40}
           className="w-10 h-10 rounded-full"
         />
+
         <div className="flex-1 space-y-3">
-          <p className="text-sm font-medium text-gray-500">
-            {comment.user.name}
-          </p>
+         <div className="w-full flex items-center justify-between text-sm font-medium text-gray-500">
+              <div>{comment.user.name}</div>
+
+              {/* 댓글 수정 삭제 */}
+              <div>
+               <CommentSetting comment={comment} />
+              </div>
+          </div>
+
+
           <p className="text-gray-900">{comment.content}</p>
 
-          <CommentCreateForm postId={comment.postId} parentId={comment.id} />
+           <CommentCreateForm postId={comment.postId} parentId={comment.id} />
         </div>
+       
+
       </div>
       <div className="pl-4">{renderedChildren}</div>
     </div>
